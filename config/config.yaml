@@ -1,0 +1,30 @@
+active_db: "PostgreSQL" 
+
+databases:
+  - name: "shubham-postgres"
+    db_type: "PostgreSQL"
+    connection_string: "postgresql://user:pass@localhost:5432/db"
+    tables: 
+      - "accounts"
+      - "strategies"
+    poll_interval_ms: 5000
+  - name: "analytics"
+    db_type: "ScyllaDB"
+    connection_string: "127.0.0.1:9042"
+    tables:
+      - "metrics"
+    poll_interval_ms: 5000
+
+streaming:
+  kafka:
+    brokers: "localhost:9092"
+    topic_prefix: "cdc"
+    batch_size: 100
+  redis:
+    url: "redis://localhost:6379"
+    stream_prefix: "cdc"
+    max_len: 10000
+
+metrics:
+  enabled: true
+  port: 9090
